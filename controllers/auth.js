@@ -28,7 +28,15 @@ const signup = (req, res) => {
       res.status(500).send({ msg: err });
       return;
     }
-    res.status(200).send({ msg: "User was registered successfully!", user });
+    res.status(200).send({
+      msg: "User was registered successfully!",
+      user: {
+        id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+      },
+    });
   });
 };
 
@@ -68,7 +76,8 @@ const signin = (req, res) => {
 
     res.status(200).send({
       id: user._id,
-      username: user.username,
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: user.email,
       accessToken: token,
     });
